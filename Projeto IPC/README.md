@@ -518,22 +518,23 @@ Como falado anteriormente, o protocolo escolhido, TCP, é de extrema confiabilid
 Como principais resultados, nota-se:
 
 1. **Montagem do circuito eletrônico**
+
 <img width="80%" src="./images/doc/esp32.jpg">
 
-2. **Finalização do site**
+3. **Finalização do site**
 
-<video muted autoplay loop src="./images/doc/site.gif"></video>
+<img width="80%" src="./images/doc/site.gif">
 
 3. **Funcionamento completo do projeto**
 
 Color Input:
-<video muted autoplay loop src="./images/doc/liga_led.mp4" alt="[](./images/doc/liga_led.mp4)"></video>
+[](./images/doc/liga_led.mp4)
 
 Ciclo:
-<video muted autoplay loop src="./images/doc/ciclo.mp4" alt="[](./images/doc/ciclo.mp4)"></video>
+[](./images/doc/ciclo.mp4)
 
 Transição:
-<video muted autoplay loop src="./images/doc/transicao.mp4" alt="[](./images/doc/transicao.mp4)"></video>
+[](./images/doc/transicao.mp4)
 
 ### 4.2. Conclusão
 Este projeto pôde mostrar que é sim possível entrar no mundo de sistemas embarcados sem precisar estudar uma linguagem de programação de baixo nível, como C. 
