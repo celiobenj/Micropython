@@ -181,7 +181,7 @@ Orientação a objetos é um paradigma aplicado na programação que consiste na
 #### **Herança**
 O conceito de herdar é ser uma cópia de outra classe com algumas características adicionais. Assim é possível acessar métodos e atributos da classe pai ao herdar essas características. É o que foi feito com as classes `LED_RGB` (pai) e `Led` (filho).
 
-```Mermaid
+```mermaid
 classDiagram
     LED_RGB --|> Led
 
