@@ -3,7 +3,7 @@ import ujson
 from Led import Led
 from html import html
 
-# Instancia o objeto rgb
+# Instancia o objeto led
 led = Led(33, 25, 26)
 led.off()
 r, g, b = (0, 0, 0)
