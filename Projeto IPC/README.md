@@ -17,22 +17,22 @@ Os pontos mais importantes do desenvolvimento e os principais conceitos serão a
 
 <img width="48" style="padding:0 5 0 0" src="./images/logo/micropython.png"/> 
 
-**Micropython:** é uma implementação leve e eficiente da linguagem de programção Python3, que inclui um pequeno subconjunto das bibliotecas padrões do Python. É otimizada para ser executada em microcontroladores, como a ESP32 ou RaspberryPi. Ele é compacto o suficiente para caber e rodar em apenas 256 kB de memória e 16 kB de RAM [$^1$](https://micropython.org/#:~:text=MicroPython%20is%20a%20lean%20and%20efficient%20implementation%20of%20the%20Python%203%20programming%20language%20that%20includes%20a%20small%20subset%20of%20the%20Python%20standard%20library%20and%20is%20optimised%20to%20run%20on%20microcontrollers%20and%20in%20constrained%20environments.). Utilizada em todo o projeto, tem como base principal o Python.
+**Micropython:** é uma implementação leve e eficiente da linguagem de programção Python3, que inclui um pequeno subconjunto das bibliotecas padrões do Python. É otimizada para ser executada em microcontroladores, como a ESP32 ou RaspberryPi. Ele é compacto o suficiente para caber e rodar em apenas 256 kB de memória e 16 kB de RAM [1](https://micropython.org/#:~:text=MicroPython%20is%20a%20lean%20and%20efficient%20implementation%20of%20the%20Python%203%20programming%20language%20that%20includes%20a%20small%20subset%20of%20the%20Python%20standard%20library%20and%20is%20optimised%20to%20run%20on%20microcontrollers%20and%20in%20constrained%20environments.). Utilizada em todo o projeto, tem como base principal o Python.
 
 <img width="52"  src="./images/logo/python.png"/>
 
-**Python:** Python é uma linguagem de programação que permite que você trabalhe rapidamente e integre sistemas de forma mais eficaz [$^2$](https://www.python.org/#:~:text=Python%20%C3%A9%20uma%20linguagem%20de%20programa%C3%A7%C3%A3o%20que%20permite%20que%20voc%C3%AA%20trabalhe%20rapidamente%20e%20integre%20sistemas%20de%20forma%20mais%20eficaz.). Lingaguem de programação vista em sala de aula.
+**Python:** Python é uma linguagem de programação que permite que você trabalhe rapidamente e integre sistemas de forma mais eficaz [2](https://www.python.org/#:~:text=Python%20%C3%A9%20uma%20linguagem%20de%20programa%C3%A7%C3%A3o%20que%20permite%20que%20voc%C3%AA%20trabalhe%20rapidamente%20e%20integre%20sistemas%20de%20forma%20mais%20eficaz.). Lingaguem de programação vista em sala de aula.
 
 <img width="48"  src="./images/logo/javascript.png"/>
 
 **JavaScript:** 
-JavaScript é uma linguagem de programação de alto nível e interpretada, usada principalmente para criar e controlar conteúdo dinâmico em páginas web, permitindo interatividade, animações e comunicação com o back-end [$^3$](https://developer.mozilla.org/en-US/docs/Web/JavaScript#:~:text=JavaScript-,JavaScript%20(JS),-is%20a%20lightweight). Linaguem utilizada para fazer comunicação entre Front-end e Back-end (cliente e servidor).
+JavaScript é uma linguagem de programação de alto nível e interpretada, usada principalmente para criar e controlar conteúdo dinâmico em páginas web, permitindo interatividade, animações e comunicação com o back-end [3](https://developer.mozilla.org/en-US/docs/Web/JavaScript#:~:text=JavaScript-,JavaScript%20(JS),-is%20a%20lightweight). Linaguem utilizada para fazer comunicação entre Front-end e Back-end (cliente e servidor).
 
 <img width="48" src="./images/logo/esp32.jpg"/>
 
-**ESP32:** ESP32 é um chip que fornece Wi-Fi e Bluetooth para dispositivos embarcados – isto é, um dispositivo ideal para IoT (Internet das Coisas) [$^4$](https://www.nabto.com/guide-to-iot-esp-32/#:~:text=ESP32%20%C3%A9%20um%20chip%20que%20fornece%20Wi%2DFi%20e%20(em%20alguns%20modelos)%20conectividade%20Bluetooth%20para%20dispositivos%20embarcados%20%E2%80%93%20em%20outras%20palavras%2C%20para%20dispositivos%20IoT.).
+**ESP32:** ESP32 é um chip que fornece Wi-Fi e Bluetooth para dispositivos embarcados – isto é, um dispositivo ideal para IoT (Internet das Coisas) [4](https://www.nabto.com/guide-to-iot-esp-32/#:~:text=ESP32%20%C3%A9%20um%20chip%20que%20fornece%20Wi%2DFi%20e%20(em%20alguns%20modelos)%20conectividade%20Bluetooth%20para%20dispositivos%20embarcados%20%E2%80%93%20em%20outras%20palavras%2C%20para%20dispositivos%20IoT.).
 
-**Informações técnicas (ESP32):** [$^5$](https://www.saravati.com.br/placa-esp32-wifi-bluetooth-devkit-v1-30-pinos.html#:~:text=ESP32%20ESP%2DWROOM%2D32%20DEVKit,Conex%C3%A3o%20Wifi%202.4Ghz)
+**Informações técnicas (ESP32):** [5](https://www.saravati.com.br/placa-esp32-wifi-bluetooth-devkit-v1-30-pinos.html#:~:text=ESP32%20ESP%2DWROOM%2D32%20DEVKit,Conex%C3%A3o%20Wifi%202.4Ghz)
 
 * ESP32 ESP-WROOM-32 DEVKit V1
 * CPU: Xtensa® Dual-Core 32-bit LX6
@@ -49,7 +49,7 @@ JavaScript é uma linguagem de programação de alto nível e interpretada, usad
 
 <img width="48" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/2048px-Visual_Studio_Code_1.35_icon.svg.png" alt="vscode-logo"/>
 
-**VS Code:** O Visual Studio Code (VS Code) é um editor de código de código aberto desenvolvido pela Microsoft. É apenas um Editor de Código, o qual possui as funcionalidades mais simples como: [$^6$](https://www.treinaweb.com.br/blog/vs-code-o-que-e-e-por-que-voce-deve-usar#:~:text=O%20Visual%20Studio%20Code%20(VS%20Code)%20%C3%A9%20um%20editor%20de%20c%C3%B3digo%20de%20c%C3%B3digo%20aberto%20desenvolvido%20pela%20Microsoft.)
+**VS Code:** O Visual Studio Code (VS Code) é um editor de código de código aberto desenvolvido pela Microsoft. É apenas um Editor de Código, o qual possui as funcionalidades mais simples como: [6](https://www.treinaweb.com.br/blog/vs-code-o-que-e-e-por-que-voce-deve-usar#:~:text=O%20Visual%20Studio%20Code%20(VS%20Code)%20%C3%A9%20um%20editor%20de%20c%C3%B3digo%20de%20c%C3%B3digo%20aberto%20desenvolvido%20pela%20Microsoft.)
 
 * edição de código com suporte a várias linguagens de programação;
 * terminal de comandos integrado;
@@ -57,7 +57,7 @@ JavaScript é uma linguagem de programação de alto nível e interpretada, usad
 
 <img width="52" src="./images/logo/thonny.png">
 
-**Thonny:** é uma IDE de Python que permite que se programe as placas ESP32 e ESP8266 com MicroPython. [$^7$](https://randomnerdtutorials.com/getting-started-thonny-micropython-python-ide-esp32-esp8266/)
+**Thonny:** é uma IDE de Python que permite que se programe as placas ESP32 e ESP8266 com MicroPython. [7](https://randomnerdtutorials.com/getting-started-thonny-micropython-python-ide-esp32-esp8266/)
 
 ## 2. Justificativa e objetivos
 
@@ -176,14 +176,12 @@ O módulo `time` também é próprio do Python e serve para controlar o fluxo de
 Antes de explicar as classes, é importante que se conheça o que é POO (Programação Orientada a Objetos).
 
 ### 3.3 Orientação a objetos em Python
-Orientação a objetos é um paradigma aplicado na programação que consiste na interação entre diversas unidades chamadas de objetos [$^8$](https://balta.io/blog/orientacao-a-objetos#:~:text=Orienta%C3%A7%C3%A3o%20a%20objetos%20%C3%A9%20um%20paradigma%20aplicado%20na%20programa%C3%A7%C3%A3o%20que%20consiste%20na%20intera%C3%A7%C3%A3o%20entre%20diversas%20unidades%20chamadas%20de%20objetos.). Ela é definida por quatro pilares principais, sendo eles herança, encapsulamento, abstração e polimorfismo. Mas vamos discutir apenas sobre herança e abstração.
+Orientação a objetos é um paradigma aplicado na programação que consiste na interação entre diversas unidades chamadas de objetos [8](https://balta.io/blog/orientacao-a-objetos#:~:text=Orienta%C3%A7%C3%A3o%20a%20objetos%20%C3%A9%20um%20paradigma%20aplicado%20na%20programa%C3%A7%C3%A3o%20que%20consiste%20na%20intera%C3%A7%C3%A3o%20entre%20diversas%20unidades%20chamadas%20de%20objetos.). Ela é definida por quatro pilares principais, sendo eles herança, encapsulamento, abstração e polimorfismo. Mas vamos discutir apenas sobre herança e abstração.
 
 #### **Herança**
 O conceito de herdar é ser uma cópia de outra classe com algumas características adicionais. Assim é possível acessar métodos e atributos da classe pai ao herdar essas características. É o que foi feito com as classes `LED_RGB` (pai) e `Led` (filho).
 
 ```Mermaid
-<!-- Diagrama UML da Herança -->
-
 classDiagram
     LED_RGB --|> Led
 
