@@ -528,13 +528,13 @@ Como principais resultados, nota-se:
 3. **Funcionamento completo do projeto**
 
 Color Input:
-[](./images/doc/liga_led.mp4)
+[Color Input](./images/doc/liga_led.mp4)
 
 Ciclo:
-[](./images/doc/ciclo.mp4)
+[Ciclo](./images/doc/ciclo.mp4)
 
 Transição:
-[](./images/doc/transicao.mp4)
+[Transição](./images/doc/transicao.mp4)
 
 ### 4.2. Conclusão
 Este projeto pôde mostrar que é sim possível entrar no mundo de sistemas embarcados sem precisar estudar uma linguagem de programação de baixo nível, como C. 
