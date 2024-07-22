@@ -522,25 +522,25 @@ Como principais resultados, nota-se:
 
 2. **Finalização do site**
 
-<video muted autoplay loop src="./images/doc/site.mp4"></video>
+<video muted autoplay loop src="./images/doc/site.gif"></video>
 
 3. **Funcionamento completo do projeto**
 
 Color Input:
-<video muted autoplay loop src="./images/doc/liga_led.mp4"></video>
+<video muted autoplay loop src="./images/doc/liga_led.mp4" alt="[](./images/doc/liga_led.mp4)"></video>
 
 Ciclo:
-<video muted autoplay loop src="./images/doc/ciclo.mp4"></video>
+<video muted autoplay loop src="./images/doc/ciclo.mp4" alt="[](./images/doc/ciclo.mp4)"></video>
 
 Transição:
-<video muted autoplay loop src="./images/doc/transicao.mp4"></video>
+<video muted autoplay loop src="./images/doc/transicao.mp4" alt="[](./images/doc/transicao.mp4)"></video>
 
 ### 4.2. Conclusão
 Este projeto pôde mostrar que é sim possível entrar no mundo de sistemas embarcados sem precisar estudar uma linguagem de programação de baixo nível, como C. 
 
 A acessibilidade que a linguagem Python proporciona e seu grande poder é o que, sem dúvidas, faz com que ela seja hoje uma das linguagens de programação mais utilizada em praticamente todas as áreas.
 
-### 5. Referências
+## 5. Referências
 
 [MicroPython - Official Documentation](https://docs.micropython.org/)
 
