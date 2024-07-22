@@ -175,11 +175,11 @@ O módulo `time` também é próprio do Python e serve para controlar o fluxo de
 
 Antes de explicar as classes, é importante que se conheça o que é POO (Programação Orientada a Objetos).
 
-### 3.3 Orientação a objetos em Python
+### 3.3. Orientação a objetos em Python
 Orientação a objetos é um paradigma aplicado na programação que consiste na interação entre diversas unidades chamadas de objetos [8](https://balta.io/blog/orientacao-a-objetos#:~:text=Orienta%C3%A7%C3%A3o%20a%20objetos%20%C3%A9%20um%20paradigma%20aplicado%20na%20programa%C3%A7%C3%A3o%20que%20consiste%20na%20intera%C3%A7%C3%A3o%20entre%20diversas%20unidades%20chamadas%20de%20objetos.). Ela é definida por quatro pilares principais, sendo eles herança, encapsulamento, abstração e polimorfismo. Mas vamos discutir apenas sobre herança e abstração.
 
 #### **Herança**
-O conceito de herdar é ser uma cópia de outra classe com algumas características adicionais. Assim é possível acessar métodos e atributos da classe pai ao herdar essas características. É o que foi feito com as classes `LED_RGB` (pai) e `Led` (filho).
+O conceito de herdar é ser uma cópia de outra classe com algumas características adicionais. Assim é possível acessar métodos e atributos da classe pai ao herdar essas características. É o que foi feito com as classes `LED_RGB` (pai) e `Led` (filho), conforme pode ser visto no diagrama UML abaixo.
 
 ```mermaid
 classDiagram
@@ -201,13 +201,351 @@ classDiagram
     }
 ```
 
+#### **Abstração**
+A abstração em POO é a capacidade de ocultar detalhes irrelevantes ou complexos de um problema e focar nos aspectos essenciais. Ela é implementada por meio de classes, que são modelos que descrevem os atributos e comportamentos comuns de um grupo de objetos [9](https://www.dio.me/articles/pilares-de-poo-em-java#:~:text=A%20abstra%C3%A7%C3%A3o%20na%20POO%20%C3%A9%20a%20capacidade%20de%20ocultar%20detalhes%20irrelevantes%20ou%20complexos%20de%20um%20problema%20e%20focar%20nos%20aspectos%20essenciais.%20Ela%20%C3%A9%20implementada%20por%20meio%20de%20classes%2C%20que%20s%C3%A3o%20modelos%20que%20descrevem%20os%20atributos%20e%20comportamentos%20comuns%20de%20um%20grupo%20de%20objetos). Que é exatamente o que estamos fazendo com a classe LED_RGB. Ao invés de ficar sempre manipulando as GPIOs diretamente, abstraimos ela para o método `rgb()`.
 
-## Running
-dotnet run
+Sabendo esses conceitos básicos, agora é possível voltar ao código.
 
-## References
-[About issues - GitHub Docs](https://docs.github.com/en/issues/tracking-your-work-with-issues/about-issues)
+### 3.4. Voltando ao código
+#### *LED_RGB.py*
+``` Python
+# LED_RGB.py
 
-[About wikis - GitHub Docs](https://docs.github.com/en/communities/documenting-your-project-with-wikis/about-wikis)
+from machine import Pin, PWM
 
-[About discussions - GitHub Docs](https://docs.github.com/en/discussions/collaborating-with-your-community-using-discussions/about-discussions)
+class LED_RGB:
+    def __init__(self, 
+                 r_pin: int, 
+                 g_pin: int, 
+                 b_pin: int, 
+                 freq: int = 60
+                 ) -> None:
+        self.PWM_r = PWM(Pin(r_pin))
+        self.PWM_g = PWM(Pin(g_pin))
+        self.PWM_b = PWM(Pin(b_pin))
+        
+        self.PWM_r.freq(freq)
+        self.PWM_g.freq(freq)
+        self.PWM_b.freq(freq)
+    
+    
+    def rgb(self, 
+            r: int, 
+            g: int, 
+            b: int
+            ) -> None:
+        print(f"r: {r}, g: {g}, b: {b}\n")
+        self.red(r)
+        self.green(g)
+        self.blue(b)
+        
+        
+    def red(self, 
+            duty: int) -> None:
+        self.PWM_r.duty(duty)
+    
+    
+    def green(self, 
+              duty: int) -> None:
+        self.PWM_g.duty(duty)
+    
+    
+    def blue(self,
+             duty: int) -> None:
+        self.PWM_b.duty(duty)
+        
+        
+    def off(self) -> None:
+        self.rgb(0, 0, 0)
+```
+Nesta classe, é apenas abstraído a ideia de PWM nos respectivos pinos dos leds vermelho, verde e azul, que são definidos quando instaciamos o objeto `Led` (que herda de `RGB_LED`).
+
+#### *Led.py*
+```Python
+# Led.py
+
+from LED_RGB import LED_RGB as led
+from time import sleep_ms
+
+# Herdando a classe LED_RGB para a classe Led
+class Led(led):
+    def cicle(self, 
+              preset: int = 1,
+              delay: int = 50, 
+              loop: int = 1,
+              hex_list: list[str] = []
+              ) -> None:
+        
+        if preset == 1:
+            delay = 250
+            loop = 2
+            hex_list = [ 
+                "#000000", # black (off)
+                "#0000FF", # blue
+                "#00FF00", # green
+                "#00FFFF", # green + blue = cyan
+                "#FF0000", # red
+                "#FF00FF", # red + blue = purple
+                "#FFFF00", # red + green = yellow
+                "#FFFFFF", # red + green + blue = white (on)
+            ]
+            
+        elif preset == 2:
+            delay = 100
+            loop = 4
+            hex_list = [
+                "#0000FF", # blue
+                "#00FF00", # green
+                "#00FFFF", # green + blue = cyan
+                "#00FF00", # green
+                "#0000FF", # blue
+            ]
+        
+        elif preset == 3:
+            delay = 250
+            loop = 5
+            hex_list = [ 
+                "#0000FF", # blue
+                "#FF0000", # red
+            ]
+            
+        for _ in range(loop):
+            for h in hex_list:
+                h = list(h)
+
+                r = int(h[1] + h[2], 16)*4
+                g = int(h[3] + h[4], 16)*4
+                b = int(h[5] + h[6], 16)*4
+                
+                led.rgb(self, r, g, b)
+                sleep_ms(delay)
+    
+    def transition(self, 
+                   delay: int, 
+                   step: int = 64
+                   ) -> None:
+        
+        # Estado inicial de r, g e b (definido arbitrariamente)
+        r, g, b = 1023, 0, 0
+
+        led.rgb(self, r, g, b)
+
+        # r = 1023, g aumenta de 0 para 1023, b = 0
+        while g < 1023:
+            g += step
+            g = 1023 if g > 1023 else g
+
+            led.rgb(self, r, g, b)        
+            sleep_ms(delay)
+
+            if g > 1023: break
+
+
+        # r diminui de 1023 para 0, g = 1023, b = 0
+        while r > 0:
+            r -= step
+            r = 0 if r < 0 else r
+
+            led.rgb(self, r, g, b)
+            sleep_ms(delay)
+
+            if r < 0: break
+
+
+        # g = 1023, b aumenta de 0 para 1023, r = 0
+        while b < 1023:
+            b += step
+            b = 1023 if b > 1023 else b
+
+            led.rgb(self, r, g, b)
+            sleep_ms(delay)
+
+            if b > 1023: break
+
+
+        # g diminui de 1023 para 0, b = 1023, r = 0
+        while g > 0:
+            g -= step
+            g = 0 if g < 0 else g
+
+            led.rgb(self, r, g, b)
+            sleep_ms(delay)
+
+            if g < 0: break
+
+
+        # r aumenta de 0 para 1023, g = 0, b = 1023
+        while r < 1023:
+            r += step
+            r = 1023 if r > 1023 else r
+
+            led.rgb(self, r, g, b)
+            sleep_ms(delay)
+
+            if r > 1023: break
+
+
+        # b diminui de 1023 para 0, r = 1023, g = 0
+        while b > 255:
+            b -= step
+            b = 255 if b < 255 else b
+
+            led.rgb(self, r, g, b)
+            sleep_ms(delay)
+            
+            if b < 255: break
+```
+Esta classe apenas adiciona mais dois outros métodos em relação à `LED_RGB`, esses métodos são relacionados à regra de negócio escolhida. 
+
+O método `cicle()` define um ciclo definido, que é controlado pelo `hex_list`, que é uma lista que contém os códigos, em hexadecimal, das cores que o usuário quer que o led fique em cada iteração.
+
+O método `transition()` varia entre diversas cores de uma maneira muito mais suave, mas sem muita liberdade de qual cor exatamente se quer em cada iteração.
+
+### 3.5. De volta ao *main.py* 
+```Python
+# main.py continuação pt. 2
+
+# Instancia o objeto led
+led = Led(33, 25, 26)
+led.off()
+r, g, b = (0, 0, 0)
+```
+Nesta parte do `main.py` é instanciado o objeto que abstrai os pinos do led, no caso, os pinos que controlam a cor vermelho, verde e azul são as GPIOs 33, 25 e 26, respectivamente, como é possível ver no esquemático do circuito abaixo.
+
+<img width="80%" src="./images/schematics.png">
+
+---
+
+```Python
+# main.py continuação pt. 3
+
+# Inicia o servidor WEB - TCP/IP Protocol (IPv4)
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.bind(('', 80))
+s.listen(5)
+print('Aguardando conexões...')
+
+# Página HTML no arquivo html.py
+html = html.page()
+```
+Aqui é utilizado o *module* `socket`, é, conforme a própria documentação do Python: "A Low-level networking interface [...]  somewhat higher-level than in the C interface" [10](https://docs.python.org/3/library/socket.html#module-socket:~:text=%7C-,socket%20%E2%80%94%20Low%2Dlevel%20networking%20interface,-%C2%B6). Ou seja, mesmo sendo de "baixo nível", ela ainda é mais legível que sua correspondete em C. 
+
+Esse módulo serve basicamente para abrir uma porta na rede (porta 80), esperar um cliente se conectar e aceitar a conexão. Ao utilizar o protocolo TCP/IP, como no caso, há maior fidelidade nos dados que estão sendo encaminhados de cliente para servidor, e vice-versa, embora mais lento.
+
+Logo abaixo `html = html.page()` está apenas armazenando a *string* do site html - esta que, por sua vez, retorna do método `page()`, dentro da classe `html`. Isso é necessário pois quando o cliente solicitar resposta, o socket deve enviar a página html como resposta, no caso, a string html.
+
+---
+
+```Python
+# main.py continuação pt. 4
+
+# dentro do loop while True:
+
+conn, address = s.accept() # Handshake
+print('Cliente conectado de', address)
+
+request = str(conn.recv(2**10))
+```
+Nesta parte de loop indefinito, é feito a conexão com o cliente com o comando `s.accept()`, lembrando que `s` é um objeto do tipo socket, ou seja, está "armazenando" o servidor.
+
+`conn` é um novo objeto socket usado para enviar e receber dados da conexão servidor-cliente. `address` é o endereço (IPv4) de quem se conectou (cliente).
+
+`request` está recebendo a string de até $2^{10} = 1024$ bits de dados que o cliente está mandando.
+
+---
+
+```Python
+# main.py continuação pt. 5
+
+# dentro do loop while True:
+
+if 'GET / ' in request:
+    conn.send('HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n')
+    conn.send(html)
+    
+elif 'POST /result' in request:
+    body = str("{"+request.split('{')[-1]).split('\'')[0]
+    data = ujson.loads(body) # Cria um dicionário JSON
+    type = data['type'] # Qual dos dados foi enviado (update_color, cicle, transition)
+        
+
+    if type == 'update_color':
+        r = int(data['r']) * 4
+        g = int(data['g']) * 4
+        b = int(data['b']) * 4
+        led.rgb(r, g, b)
+    
+    elif type == 'cicle':
+        preset = int(data['preset'])
+        if preset in {1, 2, 3}: 
+            led.cicle(preset)
+            led.off()
+            continue
+        delay = int(data['delay'])
+        loop = 1
+        hex_list = data['hex_list'].split(chr(0x5C)+'n')
+        led.cicle(preset, delay, loop, hex_list)
+        led.off()
+        
+    
+    elif type == 'transition':
+        delay = int(data['delay'])
+        led.transition(delay)
+        led.off()
+        
+    
+    conn.send('HTTP/1.1 200 OK\r\nContent-Type: application/json\r\n\r\n')
+    conn.send(ujson.dumps({'status': 'success'}))
+
+conn.close()
+```
+
+Se `'GET / ' in request:` for verdadeiro, isso demostra que o cliente está pedindo uma resposta afirmativa que ele conseguiu se conectar, e para isso o servidor precisa enviar dados, no caso, a própria página html.
+
+Senão, se `'POST /result' in request`, quer dizer que o cliente enviou algum dado. `body` vai procurar o corpo principal desses dados e armazena em `data`. Todos os dados que podem ser enviados pelo usuário tem o atributo `type`, para que seja possível identificar qual fluxo de trabalho será executado.
+
+Daí, dependendo do valor do `type`, ele executa alguma das regras de negócio definidas.
+
+Ao final desse fluxo verdade de `elif 'POST /result' in request`, o servidor manda ao cliente que essa interação foi bem sucedida e manda `conn.send(ujson.dumps({'status': 'success'}))`. Após isso, o socket é fechado com `conn.close()`, para poder aguardar uma nova conexão, retornando para o começo do loop infinito do `while True`.
+
+### 3.6. Por que tantas confirmações?
+Como falado anteriormente, o protocolo escolhido, TCP, é de extrema confiabilidade, sendo assim necessárias diversas confirmações para uma conexão. Isso garante que nenhum dado seja perdido entre as comunicações. O diagrama abaixo representa bem essa situação.
+
+<img width="80%" src="./images/doc/tcp.png">
+
+## 4. Resultados e Conclusão
+### 4.1. Resultados
+Como principais resultados, nota-se:
+
+1. **Montagem do circuito eletrônico**
+<img width="80%" src="./images/doc/esp32.jpg">
+
+2. **Finalização do site**
+
+<video muted autoplay loop src="./images/doc/site.mp4"></video>
+
+3. **Funcionamento completo do projeto**
+
+Color Input:
+<video muted autoplay loop src="./images/doc/liga_led.mp4"></video>
+
+Ciclo:
+<video muted autoplay loop src="./images/doc/ciclo.mp4"></video>
+
+Transição:
+<video muted autoplay loop src="./images/doc/transicao.mp4"></video>
+
+### 4.2. Conclusão
+Este projeto pôde mostrar que é sim possível entrar no mundo de sistemas embarcados sem precisar estudar uma linguagem de programação de baixo nível, como C. 
+
+A acessibilidade que a linguagem Python proporciona e seu grande poder é o que, sem dúvidas, faz com que ela seja hoje uma das linguagens de programação mais utilizada em praticamente todas as áreas.
+
+### 5. Referências
+
+[MicroPython - Official Documentation](https://docs.micropython.org/)
+
+[Python - Official Documentation](https://www.docs.python.org/)
+
+[ESP32 for IoT: A Complete Guide](https://www.nabto.com/guide-to-iot-esp-32/)
+
+[Getting Started with Thonny MicroPython IDE](https://randomnerdtutorials.com/getting-started-thonny-micropython-python-ide-esp32-esp8266/)
